@@ -9,7 +9,7 @@ import {
   oidcLog,
   ReactOidcHistory,
   AuthParams,
-} from '@axa-fr/react-oidc-core';
+} from 'react-oidc-core-params-redirect';
 
 import withServices from '../withServices';
 import { AuthenticationContext } from '../oidcContext';
