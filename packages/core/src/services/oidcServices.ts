@@ -1,12 +1,12 @@
 import { oidcLog } from './loggerService';
 import { User, UserManager } from 'oidc-client';
 import { ReactOidcHistory } from '../routes/withRouter';
+import { AuthParams } from '../authparams';
 
 let userRequested = false;
 let numberAuthentication = 0;
 
-export const isRequireAuthentication = (user: User, isForce?: boolean): boolean =>
-  isForce || !user || (user && user.expired === true);
+export const isRequireAuthentication = (user: User, isForce?: boolean): boolean => isForce || !user || (user && user.expired === true);
 
 export const isRequireSignin = (oidcUser: User, isForce?: boolean) => isForce || !oidcUser;
 
@@ -14,7 +14,8 @@ export const authenticateUser = (
   userManager: UserManager,
   location: Location,
   history?: ReactOidcHistory,
-  user: User = null
+  user: User = null,
+  authParams: Partial<AuthParams> = {}
 ) => async (isForce: boolean = false, callbackPath: string = null) => {
   let oidcUser = user;
   if (!oidcUser) {
@@ -29,7 +30,7 @@ export const authenticateUser = (
   if (isRequireSignin(oidcUser, isForce)) {
     oidcLog.info('authenticate user...');
     userRequested = true;
-    await userManager.signinRedirect({ data: { url } });
+    await userManager.signinRedirect({ data: { url }, ...authParams });
     userRequested = false;
   } else if (oidcUser && oidcUser.expired) {
     userRequested = true;
@@ -59,5 +60,4 @@ export const logoutUser = async (userManager: UserManager) => {
   }
 };
 
-export const signinSilent = (getUserManager: () => UserManager) => (data: any = undefined) =>
-  getUserManager().signinSilent(data);
+export const signinSilent = (getUserManager: () => UserManager) => (data: any = undefined) => getUserManager().signinSilent(data);

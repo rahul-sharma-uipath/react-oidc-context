@@ -2,6 +2,7 @@ export { withRouter, ReactOidcHistory, OidcRoutes, useHistory } from './routes';
 export { Authenticating, Callback } from './default-component';
 export { configurationPropTypes, configurationDefaultProps } from './configurationPropTypes';
 export { compose } from './compose';
+export { AuthParams } from './authparams';
 export {
   getUserManager,
   authenticationService,

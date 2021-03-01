@@ -8,6 +8,7 @@ import {
   isRequireAuthentication,
   oidcLog,
   ReactOidcHistory,
+  AuthParams,
 } from '@axa-fr/react-oidc-core';
 
 import withServices from '../withServices';
@@ -16,6 +17,7 @@ import { AuthenticationContext } from '../oidcContext';
 type OidcComponentProps = PropsWithChildren<{
   location: Location;
   history: ReactOidcHistory;
+  authParams: Partial<AuthParams>;
   authenticateUserInternal: typeof authenticateUser;
   getUserManagerInternal: typeof getUserManager;
   isRequireAuthenticationInternal: typeof isRequireAuthentication;
@@ -30,14 +32,15 @@ export const useOidcSecure = (
   oidcLogInternal: typeof oidcLog,
   AuthenticatingInternal: typeof Authenticating,
   isRequireAuthenticationInternal: typeof isRequireAuthentication,
-  WrappedComponent: ComponentType
+  WrappedComponent: ComponentType,
+  authParams: Partial<AuthParams>
 ): ComponentType => {
   const { isEnabled, oidcUser, authenticating, isLoggingOut } = useContext(AuthenticationContext);
   useEffect(() => {
     oidcLogInternal.info('Protection : ', isEnabled);
     if (isEnabled && !isLoggingOut) {
       oidcLogInternal.info('Protected component mounted');
-      authenticateUserInternal(userManager, location, history)();
+      authenticateUserInternal(userManager, location, history, null, authParams)();
     }
     return () => {
       oidcLogInternal.info('Protected component unmounted');
@@ -61,6 +64,7 @@ export const OidcSecureWithInjectedFunctions = ({
   getUserManagerInternal,
   isRequireAuthenticationInternal,
   AuthenticatingInternal,
+  authParams,
 }: OidcComponentProps) => {
   const userManager = getUserManagerInternal();
   const WrappedComponent = useMemo(() => () => <>{children}</>, [children]);
@@ -72,7 +76,8 @@ export const OidcSecureWithInjectedFunctions = ({
     oidcLog,
     AuthenticatingInternal,
     isRequireAuthenticationInternal,
-    WrappedComponent
+    WrappedComponent,
+    authParams
   );
 
   return <ReactOidcComponent />;
@@ -87,8 +92,10 @@ const OidcSecure = withRouter(
   })
 );
 
-export const withOidcSecure = (WrappedComponent: ComponentType) => (props: PropsWithChildren<any>) => (
-  <OidcSecure>
+export const withOidcSecure = (WrappedComponent: ComponentType, authParams: Partial<AuthParams> = {}) => (
+  props: PropsWithChildren<any>
+) => (
+  <OidcSecure authParams={authParams}>
     <WrappedComponent {...props} />
   </OidcSecure>
 );

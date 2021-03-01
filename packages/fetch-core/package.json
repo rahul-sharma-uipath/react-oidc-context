@@ -1,5 +1,5 @@
 {
-  "name": "@axa-fr/react-oidc-fetch-core",
+  "name": "react-oidc-fetch-core-params-redirect",
   "version": "3.1.6",
   "private": false,
   "main": "dist/index.js",
