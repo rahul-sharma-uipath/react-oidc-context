@@ -1,6 +1,6 @@
 {
   "name": "@axa-fr/react-oidc-redux-demo",
-  "version": "3.1.6",
+  "version": "1.0.2",
   "description": "Demo how to use react oidc redux",
   "private": true,
   "main": "src/index.js",
