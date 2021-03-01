@@ -7,10 +7,7 @@
   "jsnext:main": "src/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AxaGuilDEv/react-oidc.git"
-  },
-  "bugs": {
-    "url": "https://github.com/AxaGuilDEv/react-oidc/issues"
+    "url": "git+https://github.com/rahul-sharma-uipath/react-oidc-context.git"
   },
   "scripts": {
     "prepare": "node ../../scripts/prepare.js"

@@ -6,7 +6,7 @@
   "jsnext:main": "src/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/AxaGuilDEv/react-oidc.git"
+    "url": "https://github.com/rahul-sharma-uipath/react-oidc-context.git"
   },
   "peerDependencies": {
     "recompose": "~0.30.0",

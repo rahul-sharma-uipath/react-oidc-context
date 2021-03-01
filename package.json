@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/AxaGuilDEv/react-oidc.git"
+    "url": "https://github.com/rahul-sharma-uipath/react-oidc-context.git"
   },
   "scripts": {
     "publish": "lerna publish",
