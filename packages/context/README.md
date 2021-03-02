@@ -7,7 +7,7 @@ Easy set up of OIDC for react and use the new react context api as state managem
 ## Getting Started
 
 ```sh
-npm install @axa-fr/react-oidc-context --save
+npm install react-oidc-context-params-redirect --save
 
 ```
 
