@@ -1,4 +1,4 @@
-# @axa-fr/react-oidc-context
+# react-oidc-context-params-redirect
 
 ## About
 
