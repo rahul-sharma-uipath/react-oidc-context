@@ -33,6 +33,10 @@ export const CallbackContainerCore: FC<CallbackContainerCoreProps> = ({
   const onError = onRedirectError(history, oidcLogInternal);
 
   useEffect(() => {
+    if (window.location.hash) {
+      window.location.hash = decodeURIComponent(window.location.hash);
+    }
+
     getUserManagerInternal()
       .signinRedirectCallback()
       .then(onSuccess, onError);
