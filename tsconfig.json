@@ -11,9 +11,8 @@
     "baseUrl": ".",
     "esModuleInterop": true,
     "paths": {
-      "@axa-fr/react-oidc-context": ["packages/context/dist"],
-      "@axa-fr/react-oidc-core": ["packages/core/dist"],
-      "@axa-fr/react-oidc-fetch-core": ["packages/fetch-core/dist"]
+      "react-oidc-context-params-redirect": ["packages/context/dist"],
+      "react-oidc-core-params-redirect": ["packages/core/dist"]
     }
   }
 }

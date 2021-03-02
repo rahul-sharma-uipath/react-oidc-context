@@ -17,11 +17,11 @@ import { AuthenticationContext } from '../oidcContext';
 type OidcComponentProps = PropsWithChildren<{
   location: Location;
   history: ReactOidcHistory;
-  authParams: Partial<AuthParams>;
   authenticateUserInternal: typeof authenticateUser;
   getUserManagerInternal: typeof getUserManager;
   isRequireAuthenticationInternal: typeof isRequireAuthentication;
   AuthenticatingInternal: typeof Authenticating;
+  authParams?: Partial<AuthParams>;
 }>;
 
 export const useOidcSecure = (
@@ -33,7 +33,7 @@ export const useOidcSecure = (
   AuthenticatingInternal: typeof Authenticating,
   isRequireAuthenticationInternal: typeof isRequireAuthentication,
   WrappedComponent: ComponentType,
-  authParams: Partial<AuthParams>
+  authParams?: Partial<AuthParams>
 ): ComponentType => {
   const { isEnabled, oidcUser, authenticating, isLoggingOut } = useContext(AuthenticationContext);
   useEffect(() => {
