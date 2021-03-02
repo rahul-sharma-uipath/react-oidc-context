@@ -1,6 +1,6 @@
 {
   "name": "react-oidc-context-params-redirect",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "private": false,
   "main": "dist/index.js",
   "jsnext:main": "src/index.js",
@@ -26,8 +26,8 @@
     "react-dom": ">=16.8.6"
   },
   "dependencies": {
-    "react-oidc-core-params-redirect": "1.0.4",
-    "prop-types": "^15.7.2"
+    "prop-types": "^15.7.2",
+    "react-oidc-core-params-redirect": "^1.0.6"
   },
   "license": "MIT",
   "publishConfig": {

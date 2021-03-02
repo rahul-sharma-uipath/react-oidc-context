@@ -1,5 +1,5 @@
 import React, { ComponentType, FC, useEffect } from 'react';
-import { withRouter, getUserManager, oidcLog, Callback, ReactOidcHistory } from '@axa-fr/react-oidc-core';
+import { withRouter, getUserManager, oidcLog, Callback, ReactOidcHistory } from 'react-oidc-core-params-redirect';
 import { User, UserManager } from 'oidc-client';
 import withServices from '../withServices';
 
