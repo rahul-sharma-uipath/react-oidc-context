@@ -1,21 +1,13 @@
 # Fork of @axa-fr/react-oidc - https://github.com/AxaGuilDEv/react-oidc
 
-Changes: 
+## Changes: 
 - adds ability to pass params to the /authorize endpoint
 - adds onRedirectCallback prop to allow functions to be called from redirect component
 
+
+
 [![Build status](https://dev.azure.com/axaguildev/react-oidc/_apis/build/status/AxaGuilDEv.react-oidc?branch=master)](https://dev.azure.com/axaguildev/react-oidc/_build)
 [![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=AxaGuilDEv_react-oidc&metric=alert_status)](https://sonarcloud.io/dashboard?id=AxaGuilDEv_react-oidc) [![Reliability](https://sonarcloud.io/api/project_badges/measure?project=AxaGuilDEv_react-oidc&metric=reliability_rating)](https://sonarcloud.io/component_measures?id=AxaGuilDEv_react-oidc&metric=reliability_rating) [![Security](https://sonarcloud.io/api/project_badges/measure?project=AxaGuilDEv_react-oidc&metric=security_rating)](https://sonarcloud.io/component_measures?id=AxaGuilDEv_react-oidc&metric=security_rating) [![Code Corevage](https://sonarcloud.io/api/project_badges/measure?project=AxaGuilDEv_react-oidc&metric=coverage)](https://sonarcloud.io/component_measures?id=AxaGuilDEv_react-oidc&metric=Coverage) [![Twitter](https://img.shields.io/twitter/follow/GuildDEvOpen?style=social)](https://twitter.com/intent/follow?screen_name=GuildDEvOpen)
-
-<p align="center">
-    <img src="./docs/img/introduction.gif"
-     alt="Sample React Oicd"
-      />
-</p>
-
-<p align="center">
-  A set of react components and HOC to make Oidc (OpenID Connect) client easy. It aim to simplify OAuth authentication between multiples providers.
-</p>
 
 - [About](#about)
 - [Getting Started](#getting-started)
