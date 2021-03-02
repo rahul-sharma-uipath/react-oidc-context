@@ -6,7 +6,7 @@ import withServices from '../withServices';
 export const onRedirectSuccess = (history: ReactOidcHistory, oidcLogInternal: typeof oidcLog) => (user: User) => {
   oidcLogInternal.info('Successfull login Callback', user);
   if (user.state.url) {
-    history.push(user.state.url);
+    history.push(user.state.url, user);
   } else {
     oidcLogInternal.warn('no location in state');
   }
@@ -33,10 +33,6 @@ export const CallbackContainerCore: FC<CallbackContainerCoreProps> = ({
   const onError = onRedirectError(history, oidcLogInternal);
 
   useEffect(() => {
-    if (window.location.hash) {
-      window.location.hash = decodeURIComponent(window.location.hash);
-    }
-
     getUserManagerInternal()
       .signinRedirectCallback()
       .then(onSuccess, onError);
