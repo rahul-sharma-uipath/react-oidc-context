@@ -13,7 +13,7 @@
 - [Getting Started](#getting-started)
 - [How It Works](#how-it-works)
 - Packages
-  - [`react-oidc-context-params-redirect`](./packages/context#readme.md) [![npm version](https://badge.fury.io/js/%40axa-fr%2Freact-oidc-context.svg)](https://badge.fury.io/js/%40axa-fr%2Freact-oidc-context)
+  - [`react-oidc-context-params-redirect`](./packages/context#readme.md)
 - [Concepts](#concepts)
 - [Contribute](#contribute)
 
