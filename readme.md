@@ -29,7 +29,7 @@ Two version of the component with different "State management" are available :
 
 ## Getting Started
 
-- [`@axa-fr/react-oidc-context`](./packages/context#readme)
+- [`react-oidc-context-params-redirect`](./packages/context#readme)
 
 ## How It Works
 
