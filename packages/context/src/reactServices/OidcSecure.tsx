@@ -86,14 +86,12 @@ export const OidcSecureWithInjectedFunctions = ({
   return <ReactOidcComponent key="react-oidc-wrapped-component" />;
 };
 
-const OidcSecure = withRouter(
-  withServices(OidcSecureWithInjectedFunctions, {
-    authenticateUserInternal: authenticateUser,
-    getUserManagerInternal: getUserManager,
-    isRequireAuthenticationInternal: isRequireAuthentication,
-    AuthenticatingInternal: Authenticating,
-  })
-);
+const OidcSecure = withServices(OidcSecureWithInjectedFunctions, {
+  authenticateUserInternal: authenticateUser,
+  getUserManagerInternal: getUserManager,
+  isRequireAuthenticationInternal: isRequireAuthentication,
+  AuthenticatingInternal: Authenticating,
+});
 
 export const withOidcSecure = (WrappedComponent: ComponentType, authParams: Partial<AuthLoginParams> = {}) => (
   props: PropsWithChildren<any>
