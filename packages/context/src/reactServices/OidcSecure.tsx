@@ -46,11 +46,14 @@ export const useOidcSecure = (
       oidcLogInternal.info('Protected component unmounted');
     };
   }, [isEnabled, authenticateUserInternal, userManager, oidcLogInternal, location, history, isLoggingOut]);
+
   const requiredAuth = useMemo(() => isRequireAuthenticationInternal(oidcUser, false) && isEnabled, [
     isEnabled,
     isRequireAuthenticationInternal,
     oidcUser,
   ]);
+
+  oidcLogInternal.info('required auth', requiredAuth);
 
   const AuthenticatingComponent: ComponentType = authenticating || AuthenticatingInternal;
   return requiredAuth ? AuthenticatingComponent : WrappedComponent;
