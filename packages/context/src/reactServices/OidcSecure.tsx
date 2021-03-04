@@ -8,7 +8,7 @@ import {
   isRequireAuthentication,
   oidcLog,
   ReactOidcHistory,
-  AuthParams,
+  AuthLoginParams,
 } from 'react-oidc-core-params-redirect';
 
 import withServices from '../withServices';
@@ -21,7 +21,7 @@ type OidcComponentProps = PropsWithChildren<{
   getUserManagerInternal: typeof getUserManager;
   isRequireAuthenticationInternal: typeof isRequireAuthentication;
   AuthenticatingInternal: typeof Authenticating;
-  authParams?: Partial<AuthParams>;
+  authParams?: Partial<AuthLoginParams>;
 }>;
 
 export const useOidcSecure = (
@@ -33,7 +33,7 @@ export const useOidcSecure = (
   AuthenticatingInternal: typeof Authenticating,
   isRequireAuthenticationInternal: typeof isRequireAuthentication,
   WrappedComponent: ComponentType,
-  authParams?: Partial<AuthParams>
+  authParams?: Partial<AuthLoginParams>
 ): ComponentType => {
   const { isEnabled, oidcUser, authenticating, isLoggingOut } = useContext(AuthenticationContext);
   useEffect(() => {
@@ -92,7 +92,7 @@ const OidcSecure = withRouter(
   })
 );
 
-export const withOidcSecure = (WrappedComponent: ComponentType, authParams: Partial<AuthParams> = {}) => (
+export const withOidcSecure = (WrappedComponent: ComponentType, authParams: Partial<AuthLoginParams> = {}) => (
   props: PropsWithChildren<any>
 ) => (
   <OidcSecure authParams={authParams}>

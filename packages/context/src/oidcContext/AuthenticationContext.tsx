@@ -1,11 +1,12 @@
 import React, { ComponentType } from 'react';
 import { User, UserManagerEvents, UserManager } from 'oidc-client';
+import { AuthLogoutParams } from 'react-oidc-core-params-redirect';
 
 export type oidcContext = {
   oidcUser: User | null;
   isEnabled: boolean;
   login: Function;
-  logout: Function;
+  logout: (args?: Partial<AuthLogoutParams>) => void;
   events: UserManagerEvents;
   authenticating: ComponentType;
   isLoading: boolean;

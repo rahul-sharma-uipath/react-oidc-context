@@ -1,7 +1,7 @@
 import { oidcLog } from './loggerService';
 import { User, UserManager } from 'oidc-client';
 import { ReactOidcHistory } from '../routes/withRouter';
-import { AuthParams } from '../authparams';
+import { AuthLoginParams, AuthLogoutParams } from '../authparams';
 
 let userRequested = false;
 let numberAuthentication = 0;
@@ -15,7 +15,7 @@ export const authenticateUser = (
   location: Location,
   history?: ReactOidcHistory,
   user: User = null,
-  authParams: Partial<AuthParams> = {}
+  authParams: Partial<AuthLoginParams> = {}
 ) => async (isForce: boolean = false, callbackPath: string = null) => {
   let oidcUser = user;
   if (!oidcUser) {
@@ -49,14 +49,17 @@ export const authenticateUser = (
   }
 };
 
-export const logoutUser = async (userManager: UserManager) => {
+export const logoutUser = async (userManager: UserManager, params?: Partial<AuthLogoutParams>) => {
   if (!userManager || !userManager.getUser) {
     return;
   }
   const oidcUser = await userManager.getUser();
   if (oidcUser) {
     oidcLog.info('Logout user...');
-    await userManager.signoutRedirect();
+    await userManager.signoutRedirect(params);
+  } else if(params?.force_logout_uri) {
+    oidcLog.info('Force logout user...');
+    window.location.assign(params.force_logout_uri);
   }
 };
 

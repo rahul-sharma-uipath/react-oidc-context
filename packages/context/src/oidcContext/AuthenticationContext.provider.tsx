@@ -14,6 +14,7 @@ import {
   authenticateUser,
   logoutUser,
   setUserManager,
+  AuthLogoutParams,
 } from 'react-oidc-core-params-redirect';
 
 import { Callback } from '../Callback';
@@ -148,15 +149,18 @@ export const AuthenticationProviderInt = ({
     await authenticateUserInt(userManager, location, history)();
   }, [authenticateUserInt, history, location, oidcLogInt, onLoading, userManager]);
 
-  const logoutCallback = useCallback(async () => {
-    try {
-      onLogout();
-      await logoutUserInt(userManager);
-      oidcLogInt.info('Logout successfull');
-    } catch (error) {
-      onError(error.message);
-    }
-  }, [logoutUserInt, oidcLogInt, onError, onLogout, userManager]);
+  const logoutCallback = useCallback(
+    async (params?: Partial<AuthLogoutParams>) => {
+      try {
+        onLogout();
+        await logoutUserInt(userManager, params);
+        oidcLogInt.info('Logout successfull');
+      } catch (error) {
+        onError(error.message);
+      }
+    },
+    [logoutUserInt, oidcLogInt, onError, onLogout, userManager]
+  );
   return (
     <AuthenticationContext.Provider
       value={{
