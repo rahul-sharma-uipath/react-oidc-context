@@ -83,7 +83,7 @@ export const OidcSecureWithInjectedFunctions = ({
     authParams
   );
 
-  return <ReactOidcComponent />;
+  return <ReactOidcComponent key="react-oidc-wrapped-component" />;
 };
 
 const OidcSecure = withRouter(
