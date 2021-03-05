@@ -1,6 +1,6 @@
 {
   "name": "react-oidc-context-params-redirect",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "private": false,
   "main": "dist/index.js",
   "jsnext:main": "src/index.js",
