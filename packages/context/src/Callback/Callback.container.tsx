@@ -1,5 +1,5 @@
 import React, { ComponentType, FC, useEffect } from 'react';
-import { withRouter, getUserManager, oidcLog, Callback, ReactOidcHistory } from 'react-oidc-core-params-redirect';
+import { withRouter, getUserManager, oidcLog, Callback, ReactOidcHistory, logoutUser } from 'react-oidc-core-params-redirect';
 import { User, UserManager } from 'oidc-client';
 import withServices from '../withServices';
 
@@ -12,9 +12,9 @@ export const onRedirectSuccess = (history: ReactOidcHistory, oidcLogInternal: ty
   }
 };
 
-export const onRedirectError = (history: ReactOidcHistory, oidcLogInternal: typeof oidcLog) => ({ message }: { message: string }) => {
+export const onRedirectError = (userManager: UserManager, oidcLogInternal: typeof oidcLog) => ({ message }: { message: string }) => {
   oidcLogInternal.error(`There was an error handling the token callback: ${message}`);
-  history.push(`/authentication/not-authenticated?message=${encodeURIComponent(message)}`);
+  logoutUser(userManager);
 };
 
 type CallbackContainerCoreProps = {
@@ -30,7 +30,7 @@ export const CallbackContainerCore: FC<CallbackContainerCoreProps> = ({
   callbackComponentOverride: CallbackComponentOverride,
 }) => {
   const onSuccess = onRedirectSuccess(history, oidcLogInternal);
-  const onError = onRedirectError(history, oidcLogInternal);
+  const onError = onRedirectError(getUserManagerInternal(), oidcLogInternal);
 
   useEffect(() => {
     getUserManagerInternal()
