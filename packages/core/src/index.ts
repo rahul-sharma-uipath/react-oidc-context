@@ -4,6 +4,7 @@ export { configurationPropTypes, configurationDefaultProps } from './configurati
 export { compose } from './compose';
 export { AuthLoginParams, AuthLogoutParams } from './authparams';
 export {
+  getBaseRoute,
   getUserManager,
   authenticationService,
   authenticateUser,
@@ -15,4 +16,5 @@ export {
   InMemoryWebStorage,
   UserStoreType,
   setUserManager,
+  setBaseRoute,
 } from './services';

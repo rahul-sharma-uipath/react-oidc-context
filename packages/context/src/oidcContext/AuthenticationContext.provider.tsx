@@ -15,6 +15,7 @@ import {
   logoutUser,
   setUserManager,
   AuthLogoutParams,
+  setBaseRoute,
 } from 'react-oidc-core-params-redirect';
 
 import { Callback } from '../Callback';
@@ -45,6 +46,8 @@ type AuthenticationProviderIntProps = PropsWithChildren<{
   logoutUserInt: typeof logoutUser;
   customEvents: CustomEvents;
   setUserManagerInt: typeof setUserManager;
+  baseRoute?: string;
+  setBaseRouteInt: typeof setBaseRoute;
 }>;
 
 const propTypes = {
@@ -106,7 +109,9 @@ export const AuthenticationProviderInt = ({
   callbackComponentOverride,
   children,
   customEvents,
+  baseRoute,
   // Injected
+  setBaseRouteInt,
   authenticationServiceInt,
   CallbackInt,
   setLoggerInt,
@@ -123,6 +128,7 @@ export const AuthenticationProviderInt = ({
 
   useEffect(() => {
     onLoading();
+    setBaseRouteInt(baseRoute);
     setLoggerInt(loggerLevel, logger);
     addOidcEvents();
     let mount = true;
@@ -200,6 +206,7 @@ const AuthenticationProvider: ComponentType<Partial<AuthenticationProviderProps>
     authenticateUserInt: authenticateUser,
     logoutUserInt: logoutUser,
     setUserManagerInt: setUserManager,
+    setBaseRouteInt: setBaseRoute,
   })
 );
 // @ts-ignore

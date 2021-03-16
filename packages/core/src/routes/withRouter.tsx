@@ -1,4 +1,5 @@
 import React from 'react';
+import { getBaseRoute } from '../services';
 
 const generateKey = () =>
   Math.random()
@@ -45,13 +46,14 @@ export interface ReactOidcHistory {
 const getHistory = (
   windowInternal: WindowInternal,
   CreateEventInternal: (event: string, params?: InitCustomEventParams) => CustomEvent,
-  generateKeyInternal: typeof generateKey
+  generateKeyInternal: typeof generateKey,
+  baseRoute: string = ''
 ) => {
   return {
     push: (url?: string | null, stateHistory?: WindowHistoryState): void => {
       const key = generateKeyInternal();
       const state = stateHistory || windowInternal.history.state;
-      windowInternal.history.pushState({ key, state }, null, url);
+      windowInternal.history.pushState({ key, state }, null, baseRoute + url);
       windowInternal.dispatchEvent(CreateEventInternal('popstate'));
     },
   };
@@ -62,9 +64,10 @@ export const useHistory = () => getHistory(window, CreateEvent(window, document)
 export const withRouter = (
   windowInternal: WindowInternal,
   CreateEventInternal: (event: string, params?: InitCustomEventParams) => CustomEvent,
-  generateKeyInternal: typeof generateKey
+  generateKeyInternal: typeof generateKey,
+  getBaseRouteInternal: typeof getBaseRoute
 ) => (Component: React.ComponentType) => (props: any) => {
-  const oidcHistory: ReactOidcHistory = getHistory(windowInternal, CreateEventInternal, generateKeyInternal);
+  const oidcHistory: ReactOidcHistory = getHistory(windowInternal, CreateEventInternal, generateKeyInternal, getBaseRouteInternal());
 
   const enhanceProps = {
     history: oidcHistory,
@@ -74,4 +77,4 @@ export const withRouter = (
   return <Component {...enhanceProps} />;
 };
 
-export default withRouter(window, CreateEvent(window, document), generateKey);
+export default withRouter(window, CreateEvent(window, document), generateKey, getBaseRoute);
