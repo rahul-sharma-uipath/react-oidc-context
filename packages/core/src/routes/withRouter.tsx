@@ -40,7 +40,7 @@ export const CreateEvent = (windowInternal: WindowInternal, documentInternal: Do
 type WindowHistoryState = typeof window.history.state;
 
 export interface ReactOidcHistory {
-  push: (url?: string | null, stateHistory?: WindowHistoryState) => void;
+  push: (url?: string | null, stateHistory?: WindowHistoryState, injectBaseRoute?: boolean) => void;
 }
 
 const getHistory = (
@@ -50,10 +50,11 @@ const getHistory = (
   getBaseRouteInternal: typeof getBaseRoute
 ) => {
   return {
-    push: (url?: string | null, stateHistory?: WindowHistoryState): void => {
+    push: (url?: string | null, stateHistory?: WindowHistoryState, injectBaseRoute = true): void => {
       const key = generateKeyInternal();
       const state = stateHistory || windowInternal.history.state;
-      windowInternal.history.pushState({ key, state }, null, getBaseRouteInternal() + url);
+      const baseRoute = injectBaseRoute ? getBaseRouteInternal() : '';
+      windowInternal.history.pushState({ key, state }, null, baseRoute + url);
       windowInternal.dispatchEvent(CreateEventInternal('popstate'));
     },
   };
