@@ -47,19 +47,19 @@ const getHistory = (
   windowInternal: WindowInternal,
   CreateEventInternal: (event: string, params?: InitCustomEventParams) => CustomEvent,
   generateKeyInternal: typeof generateKey,
-  baseRoute: string = ''
+  getBaseRouteInternal: typeof getBaseRoute
 ) => {
   return {
     push: (url?: string | null, stateHistory?: WindowHistoryState): void => {
       const key = generateKeyInternal();
       const state = stateHistory || windowInternal.history.state;
-      windowInternal.history.pushState({ key, state }, null, baseRoute + url);
+      windowInternal.history.pushState({ key, state }, null, getBaseRouteInternal() + url);
       windowInternal.dispatchEvent(CreateEventInternal('popstate'));
     },
   };
 };
 
-export const useHistory = () => getHistory(window, CreateEvent(window, document), generateKey);
+export const useHistory = () => getHistory(window, CreateEvent(window, document), generateKey, getBaseRoute);
 
 export const withRouter = (
   windowInternal: WindowInternal,
@@ -67,7 +67,7 @@ export const withRouter = (
   generateKeyInternal: typeof generateKey,
   getBaseRouteInternal: typeof getBaseRoute
 ) => (Component: React.ComponentType) => (props: any) => {
-  const oidcHistory: ReactOidcHistory = getHistory(windowInternal, CreateEventInternal, generateKeyInternal, getBaseRouteInternal());
+  const oidcHistory: ReactOidcHistory = getHistory(windowInternal, CreateEventInternal, generateKeyInternal, getBaseRouteInternal);
 
   const enhanceProps = {
     history: oidcHistory,
