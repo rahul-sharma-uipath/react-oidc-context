@@ -57,7 +57,7 @@ export const OidcSecureWithInjectedFunctions = ({
   ]);
 
   const AuthenticatingComponent = authenticating || AuthenticatingInternal;
-  return requiredAuth ? AuthenticatingComponent : children;
+  return requiredAuth ? <AuthenticatingComponent /> : children;
 };
 
 const OidcSecure = withRouter(
